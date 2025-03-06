@@ -3,6 +3,7 @@ package com.bridgelabz.Address.Book.service;
 import com.bridgelabz.Address.Book.dto.AddressDTO;
 import com.bridgelabz.Address.Book.model.Address;
 import com.bridgelabz.Address.Book.repository.AddressRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,11 +11,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class AddressService {
-    private final AddressRepository repository;
+    @Autowired
+    private  AddressRepository repository;
 
-    public AddressService(AddressRepository repository) {
-        this.repository = repository;
-    }
 
     public List<AddressDTO> getAll() {  return repository.findAll().stream()
             .map(this::convertToDTO)

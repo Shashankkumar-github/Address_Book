@@ -4,6 +4,7 @@ import com.bridgelabz.Address.Book.dto.AddressDTO;
 import com.bridgelabz.Address.Book.model.Address;
 import com.bridgelabz.Address.Book.service.AddressService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,11 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/addresses")
 public class AddressController {
-    private final AddressService service;
-
-    public AddressController(AddressService service) {
-        this.service = service;
-    }
+    @Autowired
+    private  AddressService service;
 
     @GetMapping
     public ResponseEntity<List<AddressDTO>> getAll() {
