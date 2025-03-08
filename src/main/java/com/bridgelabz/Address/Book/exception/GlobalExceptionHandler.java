@@ -29,5 +29,11 @@ public class GlobalExceptionHandler {
         errorResponse.put("error", "An unexpected error occurred: " + ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @ExceptionHandler(AddressBookException.class)
+    public ResponseEntity<Map<String, String>> handleAddressBookException(AddressBookException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("error", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
 }
 
