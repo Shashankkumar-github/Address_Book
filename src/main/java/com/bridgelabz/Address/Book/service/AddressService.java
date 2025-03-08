@@ -5,15 +5,18 @@ import com.bridgelabz.Address.Book.model.Address;
 import com.bridgelabz.Address.Book.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+@Slf4j
 @Service
 public class AddressService {
     @Autowired
     private  AddressRepository repository;
 
+    private final List<Address> BookData = new ArrayList<>();
 
     public List<AddressDTO> getAll() {  return repository.findAll().stream()
             .map(this::convertToDTO)
@@ -31,6 +34,15 @@ public class AddressService {
 
     private Address convertToEntity(AddressDTO dto) {
         return new Address(dto.getId(), dto.getName(), dto.getPhone(), null, null);
+    }
+    public void addBookRecord(Address record) {
+        BookData.add(record);
+        log.info("Added Book Record: {}", record);
+    }
+
+    public List<Address> getAllBookRecords() {
+        log.info("Fetching all payroll records. Total: {}", BookData.size());
+        return new ArrayList<>(BookData);
     }
 }
 

@@ -5,10 +5,11 @@ import com.bridgelabz.Address.Book.model.Address;
 import com.bridgelabz.Address.Book.service.AddressService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@Slf4j
 @RestController
 @RequestMapping("/addresses")
 public class AddressController {
@@ -42,4 +43,18 @@ public class AddressController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+    // logger
+    @PostMapping("/book/add")
+    public String addBook(@RequestBody Address record) {
+        service.addBookRecord(record);
+        log.info("Received request to add book record: {}", record);
+        return "Book record added successfully!";
+    }
+
+    @GetMapping("/book/all")
+    public List<Address> getAllAddress() {
+        log.info("Received request to fetch all book records.");
+        return service.getAllBookRecords();
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.bridgelabz.Address.Book.model;
 
+import com.bridgelabz.Address.Book.dto.AddressDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -15,4 +16,9 @@ public class Address {
     private String phone;
     private String email;
     private String city;
+    public Address(AddressDTO addressDTO) {
+        this.name = addressDTO.getName();
+        this.phone = addressDTO.getPhone();
+
+    }
 }
