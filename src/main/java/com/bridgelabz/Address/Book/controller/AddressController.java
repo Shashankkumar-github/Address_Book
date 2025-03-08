@@ -4,6 +4,7 @@ import com.bridgelabz.Address.Book.dto.AddressDTO;
 import com.bridgelabz.Address.Book.model.Address;
 import com.bridgelabz.Address.Book.service.AddressService;
 import org.springframework.http.ResponseEntity;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -27,12 +28,12 @@ public class AddressController {
         return address != null ? ResponseEntity.ok(address) : ResponseEntity.notFound().build();
     }
     @PostMapping
-    public ResponseEntity<AddressDTO> add(@RequestBody AddressDTO addressDTO) {
+    public ResponseEntity<AddressDTO> add(@Valid @RequestBody AddressDTO addressDTO) {
         return ResponseEntity.ok(service.save(addressDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AddressDTO> update(@PathVariable Long id, @RequestBody AddressDTO addressDTO) {
+    public ResponseEntity<AddressDTO> update(@PathVariable Long id,@Valid @RequestBody AddressDTO addressDTO) {
         addressDTO.setId(id);
         return ResponseEntity.ok(service.save(addressDTO));
     }
