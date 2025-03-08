@@ -1,7 +1,5 @@
 package com.bridgelabz.Address.Book.dto;
 
-
-
 import lombok.*;
 
 @Data
